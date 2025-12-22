@@ -70,7 +70,7 @@ export default function ResultView({
                 <p>總分: {totalScore}</p>
                 <p>最高分: {maxScore}</p>
                 {attemptsToClear && <p>花了幾次通關: {attemptsToClear}</p>}
-                {perfectClearCount > 0 && <p style={{ color: '#ffd700' }}>完美通關次數: {perfectClearCount}</p>}
+                <p style={{ color: '#ffd700' }}>完美通關次數: {perfectClearCount || 0}</p>
             </div>
 
             {/* Leaderboard */}

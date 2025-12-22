@@ -111,7 +111,7 @@ function doPost(e) {
       else if (header === "第一次通關分數") colMap.firstClear = i;
       else if (header === "花了幾次通關") colMap.attempts = i;
       else if (header === "最近遊玩時間") colMap.lastTime = i;
-      else if (header === "完美通關次數") colMap.perfect = i;
+      else if (header === "完美通關次數" || header === "完美通關") colMap.perfect = i;
     });
 
     const maxColIndex = Math.max(...Object.values(colMap));
