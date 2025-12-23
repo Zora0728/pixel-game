@@ -6,9 +6,9 @@
 - **進度條 (Progress Bar)**：遊戲中即時顯示當前題號進度。
 - **錯題複習 (Review Mode)**：遊戲結束後，可查看答錯題目的正確答案與完整選項文字。
 - **排行榜 (Leaderboard)**：顯示前 3 名最高分玩家 (ID 與分數)。
-- **通關判定調整**：
-    - **一般通關 (Mission Cleared)**：答對 **60%** 以上題目 (例如 5 題對 3 題)。
-    - **完美通關 (Perfect Clear)**：答對 100% 題目，將顯示特殊標題並記錄於後端。
+- **及格門檻自動調整**：根據設定的百分比（如 0.6 代表 60%）動態計算及格題數。
+    - **一般通關 (Mission Cleared)**：及格判斷自動化。
+    - **完美通關 (Perfect Clear)**：答對 100% 題目。
 - **動態欄位對應**：後端自動辨識 Google Sheet 欄位名稱，不怕欄位順序更動。
 
 ## 🚀 快速開始
@@ -30,12 +30,11 @@ npm install
 
 1.  將此專案上傳到 GitHub Repository。
 2.  進入 GitHub Repo 頁面，點選 `Settings` > `Secrets and variables` > `Actions`。
-3.  點擊 `New repository secret`。
-4.  **Name** 填入：`VITE_GOOGLE_APP_SCRIPT_URL`
-5.  **Secret** 填入：您的 GAS Web App 網址 (即 `.env` 中的網址)。
-6.  點擊 `Add secret`。
-
-設定完成後，每次您 Push 程式碼到 `main` 分支，GitHub Actions 就會自動打包並更新您的網站！
+3.  點擊 `New repository secret`。建立以下三個 Secrets：
+    -   **Name**: `VITE_GOOGLE_APP_SCRIPT_URL` / **Value**: 您的 GAS Web App 網址。
+    -   **Name**: `VITE_QUESTION_COUNT` / **Value**: 每局題數 (例如 `5`)。
+    -   **Name**: `VITE_PASS_THRESHOLD` / **Value**: 及格門檻 (例如 `3`)。
+6.  完成後，每次您 Push 程式碼到 `main` 分支，GitHub Actions 就會自動打包並更新網站！
 
 ### 2. Google Sheets & Apps Script 設定
 

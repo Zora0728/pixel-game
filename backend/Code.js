@@ -1,3 +1,8 @@
+// --- Configuration ---
+const CONFIG = {
+  PASS_THRESHOLD: 0.6 // Default 60%
+};
+
 function doGet(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("題目");
   const data = sheet.getDataRange().getValues();
@@ -80,7 +85,7 @@ function doPost(e) {
     }
 
     const score = correctCount; // Or calculate percentage
-    const passThreshold = Math.ceil(totalQuestions * 0.6); // 60%
+    const passThreshold = Math.ceil(totalQuestions * CONFIG.PASS_THRESHOLD);
     const isPerfect = (score === totalQuestions); // 100%
 
     // 3. Update "回答" Sheet

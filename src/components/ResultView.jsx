@@ -16,7 +16,8 @@ export default function ResultView({
     onReplay,
     onHome
 }) {
-    const threshold = Math.ceil(total * 0.6); // 60% threshold
+    const thresholdPercent = Number(import.meta.env.VITE_PASS_THRESHOLD) || 0.6;
+    const threshold = Math.ceil(total * thresholdPercent); // Dynamic threshold based on percentage
     const passed = score >= threshold;
     const [showReview, setShowReview] = useState(false);
 
