@@ -33,7 +33,7 @@ npm install
 3.  點擊 `New repository secret`。建立以下三個 Secrets：
     -   **Name**: `VITE_GOOGLE_APP_SCRIPT_URL` / **Value**: 您的 GAS Web App 網址。
     -   **Name**: `VITE_QUESTION_COUNT` / **Value**: 每局題數 (例如 `5`)。
-    -   **Name**: `VITE_PASS_THRESHOLD` / **Value**: 及格門檻 (例如 `3`)。
+    -   **Name**: `VITE_PASS_THRESHOLD` / **Value**: 及格門檻百分比 (例如 `0.6` 代表 60%)。
 6.  完成後，每次您 Push 程式碼到 `main` 分支，GitHub Actions 就會自動打包並更新網站！
 
 ### 2. Google Sheets & Apps Script 設定
@@ -79,7 +79,7 @@ npm install
 
 ```ini
 VITE_GOOGLE_APP_SCRIPT_URL=https://script.google.com/macros/s/您的部署ID/exec
-VITE_PASS_THRESHOLD=3 # 此參數已由後端邏輯 (60%) 取代，但可保留作為參考
+VITE_PASS_THRESHOLD=0.6 # 及格門檻百分比 (0.6 代表 60%)
 VITE_QUESTION_COUNT=5
 ```
 

@@ -51,13 +51,15 @@ export async function submitScore(id, answers) {
         };
     }
 
+    const passThreshold = import.meta.env.VITE_PASS_THRESHOLD || 0.6;
+
     // Use text/plain to avoid CORS Preflight (OPTIONS)
     const response = await fetch(API_URL, {
         method: "POST",
         headers: {
             "Content-Type": "text/plain;charset=utf-8",
         },
-        body: JSON.stringify({ id, answers }),
+        body: JSON.stringify({ id, answers, passThreshold }),
     });
 
     const data = await response.json();

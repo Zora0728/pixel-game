@@ -45,6 +45,7 @@ function doPost(e) {
     const params = JSON.parse(e.postData.contents);
     const userId = params.id;
     const userAnswers = params.answers; // { questionId: "A", ... }
+    const customThreshold = parseFloat(params.passThreshold);
 
     if (!userId || !userAnswers) {
       throw new Error("Missing ID or Answers");
@@ -85,7 +86,8 @@ function doPost(e) {
     }
 
     const score = correctCount; // Or calculate percentage
-    const passThreshold = Math.ceil(totalQuestions * CONFIG.PASS_THRESHOLD);
+    const thresholdToUse = !isNaN(customThreshold) ? customThreshold : CONFIG.PASS_THRESHOLD;
+    const passThresholdLimit = Math.ceil(totalQuestions * thresholdToUse);
     const isPerfect = (score === totalQuestions); // 100%
 
     // 3. Update "回答" Sheet
@@ -141,7 +143,7 @@ function doPost(e) {
       playCount = 1;
       totalScore = score;
       maxScore = score;
-      const isPassed = score >= passThreshold;
+      const isPassed = score >= passThresholdLimit;
       firstClearScore = isPassed ? score : "";
       attemptsToClear = isPassed ? 1 : "";
       perfectClearCount = isPerfect ? 1 : 0;
@@ -173,7 +175,7 @@ function doPost(e) {
       firstClearScore = userRow[colMap.firstClear];
       attemptsToClear = userRow[colMap.attempts];
 
-      if (!firstClearScore && score >= passThreshold) {
+      if (!firstClearScore && score >= passThresholdLimit) {
         firstClearScore = score;
         attemptsToClear = playCount;
       }
